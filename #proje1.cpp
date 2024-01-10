@@ -1,11 +1,7 @@
 #include<iostream>
-
 #include<fstream>
-
 #include<string>
-
 #include<vector>
-
 #include<iomanip>
 
 using namespace std;
@@ -365,29 +361,36 @@ void ExitProgram()
     exit(0);
 }
 
-void FunctionsRouter(short option)
+void FunctionsRouter(enMainMenueOptions  option)
 {
     switch (option)
     {
-    case 1:
+    case enMainMenueOptions::Show :
         return ShowClientsList(ClientsFileName);
-    case 2:
+    case enMainMenueOptions::Add :
         return AddClients();
-    case 3:
+    case enMainMenueOptions::Delete:
         return DeleteClient();
-    case 4:
+    case enMainMenueOptions::Update:
         return UpdateClient();
-    case 5:
+    case enMainMenueOptions::Find:
         return FindClient();
-    case 6:
+    case enMainMenueOptions::Exit:
         return ExitProgram();
 
     }
 }
 
+short ReadMainMenueOption()
+{
+    short option;
+    cout << "Choose What do you Want to Do ?  [ 1 To 6 ]" << endl;
+    cin >> option;
+    return option;
+}
 void ShowMainScreen() {
     system("cls");
-    short option;
+   
     cout << "===========================================================================================" << endl;
     cout << setw(15) << "\t\t\t\t\t   Main Menue Screen  \t \t \t \t  " << endl;
     cout << "============================================================================================" << endl;
@@ -398,12 +401,11 @@ void ShowMainScreen() {
     cout << "\t [5] Find Client " << endl;
     cout << "\t [6] Exit " << endl;
     cout << "=========================================" << endl;
-    cout << "Choose What do you Want to Do ?  [ 1 To 6 ]" << endl;
-    cin >> option;
-    FunctionsRouter(option);
+   
+   
+    FunctionsRouter( (enMainMenueOptions) ReadMainMenueOption());
 
 }
-
 
 int main() {
 
